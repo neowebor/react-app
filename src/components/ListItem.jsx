@@ -2,6 +2,48 @@ import React from 'react';
 import styled from "styled-components";
 import completeIcon from "../assets/images/check-mark.png";
 import deleteIcon from "../assets/images/delete.png";
+import {useDispatch} from "react-redux";
+import {addTodoActionCreator, removeTodoActionCreator, toggleStatusCreator} from "../redux/todoReducer";
+import {useNavigate} from 'react-router-dom'
+
+const ListItem = ({task, index}) => {
+  const dispatch = useDispatch();
+
+  function removeTask() {
+    dispatch(removeTodoActionCreator(task.id));
+  }
+
+  function toggleHandler() {
+    dispatch(toggleStatusCreator(task.id));
+  }
+
+  const navigate = useNavigate();
+
+  return (
+    <FlexContainer>
+      <Wrapper onClick={() => navigate(`/todos/${task.id}`)}>
+        <Title flag={task.status}>
+          {index + 1}. {task.name}
+        </Title>
+      </Wrapper>
+      <IconsBlock>
+        <Icon onClick={toggleHandler}>
+          <Img src={completeIcon} />
+        </Icon>
+        <Icon onClick={removeTask}>
+          <Img src={deleteIcon} />
+        </Icon>
+      </IconsBlock>
+    </FlexContainer>
+  );
+};
+
+const FlexContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+`
 
 const Wrapper = styled.div`
   width: 100%;
@@ -9,10 +51,7 @@ const Wrapper = styled.div`
   border-radius: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, .5);
   padding: 5px 15px;
-  margin-bottom: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  cursor: pointer;
 `
 
 const IconsBlock = styled.div`
@@ -35,28 +74,12 @@ const Icon = styled.div`
 const Img = styled.img`
   width: 20px;
   height: 20px;
+  cursor: pointer;
 `
 
-const ListItem = ({task, index, setTasks, tasks}) => {
-  function removeTask() {
-    setTasks(tasks.filter(elem => elem.id !== task.id))
-  }
-
-  return (
-    <div>
-      <Wrapper>
-        {index + 1}. {task.text}
-        <IconsBlock>
-          <Icon>
-            <Img src={completeIcon}/>
-          </Icon>
-          <Icon>
-            <Img src={deleteIcon} onClick={removeTask}/>
-          </Icon>
-        </IconsBlock>
-      </Wrapper>
-    </div>
-  );
-};
-
+const Title = styled.div`
+  width: 100%;
+  
+  text-decoration: ${(props) => props.flag ? 'line-through' : 'none'};
+`;
 export default ListItem;

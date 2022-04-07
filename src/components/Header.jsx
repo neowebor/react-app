@@ -29,6 +29,11 @@ const Header = () => {
     <HeaderEl>
       <Container>
         <Wrapper>
+            <NavLink to="/">
+              <TextEl>
+                Home page
+              </TextEl>
+            </NavLink>
             <NavLink to="/todos">
               <TextEl>
                 Todos

@@ -1,42 +1,43 @@
-import React, {useRef, useState} from 'react';
-import styled from 'styled-components'
+import React, {useCallback, useEffect, useState} from 'react';
 import List from "./List";
+import {useDispatch, useSelector} from "react-redux";
+import {addTodoActionCreator} from "../redux/todoReducer";
+import { Input } from './Input'
 
-const InputEl = styled.input.attrs({
-  type: 'text',
-  placeholder: 'Enter a task...'
-})`
-  width: 100%;
-  border: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, .5);
-  padding: 1rem;
-  border-radius: 10px;
-  margin-bottom: 30px;
-`;
+
 
 const Todos = () => {
-  const [tasks, setTasks] = useState([]);
-  const inputText = useRef(null);
+  const dispatch = useDispatch()
+  const tasks = useSelector(state => state.todo.tasks);
+  const state = useSelector(state => state);
 
-  function addTask(event) {
-    if(inputText.current.value === '') return;
-    if(event.keyCode === 13) {
-      const text = inputText.current.value;
-      let newTask = {
-        text,
-        id: Date.now(),
-        complete: false
-      };
-      setTasks([...tasks, newTask]);
-      inputText.current.value = '';
+  function saveToLocalStorage(state) {
+    try {
+      const prevState = JSON.stringify(state);
+      localStorage.setItem("localState", prevState);
+    } catch (e) {
+      console.warn(e);
     }
   }
 
+  useEffect(() => {
+    saveToLocalStorage(state);
+  }, [tasks])
+
+  const addTask = useCallback((value) => {
+    const newTask = {
+      id: Date.now(),
+      name: value,
+      status: false,
+    }
+
+    dispatch(addTodoActionCreator(newTask));
+  }, [])
 
   return (
     <div>
-      <InputEl ref={inputText} onKeyDown={addTask}/>
-      <List tasks={tasks} setTasks={setTasks}/>
+      <Input executorFunc={addTask}/>
+      <List tasks={tasks}/>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import Home_page from "./pages/Home_page";
 import styled from 'styled-components'
 import {Container} from "./Container";
+import TodoPage from "./TodoPage";
 
 
 const Wrapper = styled.div`
@@ -19,6 +20,7 @@ const Main = () => {
         <Routes>
           <Route path="/" element={<Home_page/>}/>
           <Route path="/todos" element={<Todos />}/>
+          <Route path="/todos/:id" element={<TodoPage />}/>
           <Route path="/photos" element={<Photos />}/>
           <Route path="*" element={<NotFound />}/>
         </Routes>
