@@ -1,12 +1,12 @@
 import React from 'react';
 import {Routes, Route} from 'react-router-dom'
-import Todos from "./Todos";
-import Photos from "./Photos";
+import Todos from "./Todo/Todos";
+import Photos from "./Photos/Photos";
 import NotFound from "./pages/NotFound";
 import Home_page from "./pages/Home_page";
 import styled from 'styled-components'
 import {Container} from "./Container";
-import TodoPage from "./TodoPage";
+import TodoPage from "./Todo/TodoPage";
 
 
 const Wrapper = styled.div`

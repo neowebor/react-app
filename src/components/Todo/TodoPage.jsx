@@ -1,8 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import styled from 'styled-components';
-import {editActionCreator} from "../redux/todoReducer";
+import {useSelector} from "react-redux";
 import Task from "./Task";
 
 const TodoPage = () => {

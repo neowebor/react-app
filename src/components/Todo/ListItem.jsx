@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from "styled-components";
-import completeIcon from "../assets/images/check-mark.png";
-import deleteIcon from "../assets/images/delete.png";
+import completeIcon from "../../assets/images/check-mark.png";
+import deleteIcon from "../../assets/images/delete.png";
 import {useDispatch} from "react-redux";
-import {addTodoActionCreator, removeTodoActionCreator, toggleStatusCreator} from "../redux/todoReducer";
+import {
+  removeTodoActionCreator,
+  toggleStatusCreator
+} from "../../redux/todoReducer";
 import {useNavigate} from 'react-router-dom'
 
 const ListItem = ({task, index}) => {

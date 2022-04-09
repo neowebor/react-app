@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Link, NavLink} from "react-router-dom";
-import Todos from "./Todos";
-import Photos from "./Photos";
+import {NavLink} from "react-router-dom";
 import {Container} from "./Container";
 
 const HeaderEl = styled.header`

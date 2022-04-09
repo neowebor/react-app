@@ -17,11 +17,16 @@ export const Input = memo(({executorFunc}) => {
 
 
   return (
-    <div style={{marginBottom: 30}}>
+    <Wrapper>
       <InputEl onChange={setValueInput} value={textValue} onKeyDown={keyPressHandler} placeholder="Enter a task..."/>
-    </div>
+    </Wrapper>
   );
 });
+
+const Wrapper = styled.div`
+  margin-bottom: 10px;
+  width: 100%;
+`
 
 export const InputEl = styled.input`
   width: 100%;

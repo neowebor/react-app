@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
-import {editActionCreator} from "../redux/todoReducer";
+import {editActionCreator} from "../../redux/todoReducer";
 import {useDispatch} from "react-redux";
 
 const Task = ({task}) => {
